@@ -5,26 +5,30 @@
     <script src="calculate.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <style>
+      :root { --font-size: 48px }
       fieldset legend, label span { font-weight: bold }
+      .grid.nocollapse { grid-template-columns: repeat(auto-fit,minmax(0%,1fr))  }
     </style>
   </head>
   <body>
     <main class="container">
       <form>
-        <label>
-          <span>Attack</span>
-          <input id="attack" name="attack" type="number" inputmode="numeric" pattern="[0-9]*" value="4">
-        </label>
+        <div class="grid nocollapse">
+          <label>
+            <span>Attack</span>
+            <input id="attack" name="attack" type="number" inputmode="numeric" pattern="[0-9]*" value="4">
+          </label>
 
 
-        <fieldset>
-          <legend>Target</legend>
-          <label><input name="target" type="radio" value="3"> 3</label>
-          <label><input name="target" type="radio" value="4" checked> 4</label>
-          <label><input name="target" type="radio" value="5"> 5</label>
-        </fieldset>
+          <fieldset>
+            <legend>Target</legend>
+            <label><input name="target" type="radio" value="3"> 3</label>
+            <label><input name="target" type="radio" value="4" checked> 4</label>
+            <label><input name="target" type="radio" value="5"> 5</label>
+          </fieldset>
+        </div>
 
-        <div class="grid">
+        <div class="grid nocollapse">
           <label>
             <span>Damage</span>
             <input id="damage" name="damage" type="number" inputmode="numeric" pattern="[0-9]*" value="2">
