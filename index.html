@@ -21,7 +21,7 @@
         <div class="grid nocollapse">
           <label>
             <span>Attack</span>
-            <input id="attack" name="attack" type="number" inputmode="numeric" pattern="[0-9]*" value="4">
+            <input id="attack" name="attack" type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="7" value="4">
           </label>
 
 
@@ -36,11 +36,11 @@
         <div class="grid nocollapse">
           <label>
             <span>Damage</span>
-            <input id="damage" name="damage" type="number" inputmode="numeric" pattern="[0-9]*" value="2">
+            <input id="damage" name="damage" type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="12" value="2">
           </label>
           <label>
             <span>Crit</span>
-            <input id="critical" name="critical" type="number" inputmode="numeric" pattern="[0-9]*" value="4">
+            <input id="critical" name="critical" type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="12" value="4">
           </label>
         </div>
       </form>
