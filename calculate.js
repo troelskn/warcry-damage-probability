@@ -71,6 +71,9 @@ window.addEventListener("load", (event) => {
     var data = groupResultsAsPercentage(calculatePermutations(attack, calculateProfile(target, damage, critical)));
 
     var htmlRows = Object.entries(data).map(([damage, probability]) => {
+      if (damage == 0) {
+        return "";
+      }
       if (probability == 0 || probability == 100) {
         probability = "~" + probability;
       }
