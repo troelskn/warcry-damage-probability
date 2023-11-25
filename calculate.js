@@ -82,6 +82,17 @@ window.addEventListener("load", (event) => {
   }
 
   window.addEventListener("change", (event) => {
+    document.getElementById("attack").addEventListener("focus", (event) => {
+      event.target.select();
+    });
+    document.getElementById("damage").addEventListener("focus", (event) => {
+      event.target.select();
+    });
+    document.getElementById("critical").addEventListener("focus", (event) => {
+      event.target.select();
+    });
+
+
     updateOutput();
   });
 
