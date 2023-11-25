@@ -62,11 +62,12 @@ window.addEventListener("load", (event) => {
   var htmlHeader = "<thead><tr><th>Min. Damage</th><th>Probability</th></tr></thead>";
   var outputContainer = document.getElementById("output");
   var form = document.querySelector("form");
+  var attack, damage, critical, target;
   var updateOutput = function() {
-    var attack = parseInt(document.getElementById("attack").value);
-    var damage = parseInt(document.getElementById("damage").value);
-    var critical = parseInt(document.getElementById("critical").value);
-    var target = parseInt(Array.prototype.slice.call(document.querySelectorAll("input[name=target]")).find((x) => x.checked).value);
+    attack = parseInt(document.getElementById("attack").value);
+    damage = parseInt(document.getElementById("damage").value);
+    critical = parseInt(document.getElementById("critical").value);
+    target = parseInt(Array.prototype.slice.call(document.querySelectorAll("input[name=target]")).find((x) => x.checked).value);
 
     var data = groupResultsAsPercentage(calculatePermutations(attack, calculateProfile(target, damage, critical)));
 
@@ -83,8 +84,26 @@ window.addEventListener("load", (event) => {
     outputContainer.innerHTML = "<table>" + htmlHeader + "<tbody>" + htmlRows + "</tbody></table>";
   }
 
+  var updateHash = function() {
+    window.location.hash = "a" + attack + "t" + target + "d" + damage + "c" + critical;
+  }
+
+  var loadFromHash = function() {
+    var values = window.location.hash.match(/a(\d)t(\d)d(\d)c(\d)/);
+    if (!values) {
+      return;
+    }
+
+    document.getElementById("attack").value = values[1];
+    document.getElementById("damage").value = values[3];
+    document.getElementById("critical").value = values[4];
+    Array.prototype.slice.call(document.querySelectorAll("input[name=target]")).find((x) => x.value == values[2]).click();
+  }
+
+
   form.addEventListener("change", (event) => {
     updateOutput();
+    updateHash();
   });
 
   document.getElementById("attack").addEventListener("focus", (event) => {
@@ -97,5 +116,6 @@ window.addEventListener("load", (event) => {
     event.target.select();
   });
 
+  loadFromHash();
   updateOutput();
 });
