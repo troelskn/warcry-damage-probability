@@ -77,23 +77,21 @@ window.addEventListener("load", (event) => {
       return "<tr><th>"+damage+"</th><td>"+probability+"%</td></tr>";
     }).join("\n");
 
-    console.log({attack: attack, damage: damage, critical: critical, target: target});
     outputContainer.innerHTML = "<table>" + htmlHeader + "<tbody>" + htmlRows + "</tbody></table>";
   }
 
-  window.addEventListener("change", (event) => {
-    document.getElementById("attack").addEventListener("focus", (event) => {
-      event.target.select();
-    });
-    document.getElementById("damage").addEventListener("focus", (event) => {
-      event.target.select();
-    });
-    document.getElementById("critical").addEventListener("focus", (event) => {
-      event.target.select();
-    });
-
-
+  form.addEventListener("change", (event) => {
     updateOutput();
+  });
+
+  document.getElementById("attack").addEventListener("focus", (event) => {
+    event.target.select();
+  });
+  document.getElementById("damage").addEventListener("focus", (event) => {
+    event.target.select();
+  });
+  document.getElementById("critical").addEventListener("focus", (event) => {
+    event.target.select();
   });
 
   updateOutput();
