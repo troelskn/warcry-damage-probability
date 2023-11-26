@@ -64,24 +64,29 @@ window.addEventListener("load", (event) => {
   var form = document.querySelector("form");
   var attack, damage, critical, target;
   var updateOutput = function() {
-    attack = parseInt(document.getElementById("attack").value);
-    damage = parseInt(document.getElementById("damage").value);
-    critical = parseInt(document.getElementById("critical").value);
-    target = parseInt(Array.prototype.slice.call(document.querySelectorAll("input[name=target]")).find((x) => x.checked).value);
+    outputContainer.innerHTML = "Calculating ...";
 
-    var data = groupResultsAsPercentage(calculatePermutations(attack, calculateProfile(target, damage, critical)));
+    // Put the rest of the calculation in a timeout, to allow screen to update
+    setTimeout(() => {
+      attack = parseInt(document.getElementById("attack").value);
+      damage = parseInt(document.getElementById("damage").value);
+      critical = parseInt(document.getElementById("critical").value);
+      target = parseInt(Array.prototype.slice.call(document.querySelectorAll("input[name=target]")).find((x) => x.checked).value);
 
-    var htmlRows = Object.entries(data).map(([damage, probability]) => {
-      if (damage == 0) {
-        return "";
-      }
-      if (probability == 0 || probability == 100) {
-        probability = "~" + probability;
-      }
-      return "<tr><th>"+damage+"</th><td>"+probability+"%</td></tr>";
-    }).join("\n");
+      var data = groupResultsAsPercentage(calculatePermutations(attack, calculateProfile(target, damage, critical)));
 
-    outputContainer.innerHTML = "<table>" + htmlHeader + "<tbody>" + htmlRows + "</tbody></table>";
+      var htmlRows = Object.entries(data).map(([damage, probability]) => {
+        if (damage == 0) {
+          return "";
+        }
+        if (probability == 0 || probability == 100) {
+          probability = "~" + probability;
+        }
+        return "<tr><th>"+damage+"</th><td>"+probability+"%</td></tr>";
+      }).join("\n");
+
+      outputContainer.innerHTML = "<table>" + htmlHeader + "<tbody>" + htmlRows + "</tbody></table>";
+    }, 1);
   }
 
   var updateHash = function() {
